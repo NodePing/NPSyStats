@@ -1,0 +1,15 @@
+{
+  "description": "npsystats",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "David Caylor",
+  "name": "npsystats",
+  "homepage": "https://github.com/NodePing/NPSyStats"
+}

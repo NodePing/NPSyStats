@@ -1,0 +1,61 @@
+body {
+     font-family: "helvetica", Verdana, Sans,serif;
+     font-size: 12px;
+}
+.plugin {
+    padding: 4px;
+    margin: 6px;
+    width: 98%;
+}
+.item {
+    border-bottom: 1px solid #DDD;
+    margin: 6px 3px;
+    width: 600px;
+}
+.label {
+    display: inline-block;
+    width: 200px;
+}
+.data {
+    display: inline-block;
+    width: 300px;
+    text-align: right;
+}
+.footer {
+    border-top: 1px solid #DDD;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.hidden {
+    display: none;
+}
+.error {
+    color: #A22;
+}
+.loading {
+    display: none;
+}
+h1 {
+    color: #444;
+}
+td {
+    text-align: right;
+    padding-right: 6px;
+    padding-left: 10px;
+    border-bottom: 1px solid #DDD;
+}
+#ps th, #ps td, #ping th, #ping td, #traceroute th, #traceroute td {
+    text-align: left;
+}
+#psdiv {
+    width: 98%;
+}
+th {
+    text-align: right;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-bottom: 1px solid #ABC;
+}
+#message {
+    float: right;
+}

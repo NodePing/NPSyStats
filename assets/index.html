@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>NPSysStats</title>
+    <link rel="stylesheet" href="/assets/main.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/css/smoothness/jquery-ui-1.10.0.custom.min.css" type="text/css" media="all" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="/assets/main.min.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="banner">
+        <div id='message'></div>
+        <h1>NPSystats</h1>
+    </div>
+    <div id='container'>
+  <ul>
+    <li><a href="#info">Info</a></li>
+    <li><a href="#mem">Memory</a></li>
+    <li><a href="#networkdiv">Network</a></li>
+    <li><a href="#mountsdiv">Mounts</a></li>
+    <li><a href="#psdiv">Processes</a></li>
+    <li><a href="#npmdiv">NPM</a></li>
+    <li><a href="#pingdiv">Ping</a></li>
+  </ul>
+
+        <div id='info' class='plugin'>
+            <div class='item'><span class='label'>Hostname:</span><span id='info_hostname'></span></div>
+            <div class='item'><span class='label'>Platform:</span><span id='info_platform'></span></div>
+            <div class='item'><span class='label'>Arch:</span><span id='info_arch'></span></div>
+            <div class='item'><span class='label'>Release:</span><span id='info_release'></span></div>
+            <div class='item'><span class='label'>Uptime:</span><span id='uptime_up'></span></div>
+            <div class='item'><span class='label'>Load:</span><span id='load_1min'></span> &nbsp; <span id='load_5min'></span> &nbsp; <span id='load_10min'></span></div>
+        </div>
+
+        <div id='mem' class='plugin'>
+            <h2>Memory</h2>
+            <div class='item'><span class='label'>Free Memory:</span><span id='mem_memfree' class='data'></span></div>
+            <div class='item'><span class='label'>Total Memory:</span><span id='mem_memtotal' class='data'></span></div>
+            <div class='item'><span class='label'>Swap Free:</span><span id='mem_swapfree' class='data'></span></div>
+            <input type='button' value='Refresh' onclick="getdata('mem');return !1">
+        </div>
+
+        <div id='networkdiv' class='plugin'>
+            <h2>Network</h2>
+            <table id='network'>
+                <tr><th>Interface</th>
+                    <th>Bytes Received</th><th>Packets Received</th><th>Errors Received</th>
+                    <th>Bytes Sent</th><th>Packets Sent</th><th>Errors Sent</th>
+                </tr>
+                <tr class='template'>
+                    <td class='key'></td>
+                    <td class='received_bytes'></td>
+                    <td class='received_packets'></td>
+                    <td class='received_errors'></td>
+                    <td class='sent_bytes'></td>
+                    <td class='sent_packets'></td>
+                    <td class='sent_errors'></td>
+                </tr>
+            </table>
+            <input type='button' value='Refresh' onclick="getdata('network');return !1">
+        </div>
+
+        <div id='mountsdiv' class='plugin'>
+            <h2>Mounts</h2>
+            <table id='mounts'>
+                <tr><th>File System</th>
+                    <th>Blocks</th><th>Used</th><th>Available</th>
+                    <th>Percent</th><th>Mount</th>
+                </tr>
+                <tr class='template'>
+                    <td class='filesystem'></td>
+                    <td class='blocks'></td>
+                    <td class='used'></td>
+                    <td class='available'></td>
+                    <td class='percent'></td>
+                    <td class='key'></td>
+                </tr>
+            </table>
+            <input type='button' value='Refresh' onclick="getdata('mounts');return !1">
+        </div>
+
+        <div id='psdiv' class='plugin'>
+            <h2>Processes</h2>
+            <table id='ps'>
+                <tr><th>PID</th>
+                    <th>TTY</th><th>STAT</th><th>TIME</th>
+                    <th>COMMAND</th>
+                </tr>
+                <tr class='template'>
+                    <td class='key'></td>
+                    <td class='PID'></td>
+                    <td class='STAT'></td>
+                    <td class='TIME'></td>
+                    <td class='COMMAND'></td>
+                </tr>
+            </table>
+            <input type='button' value='Refresh' onclick="getdata('ps');return !1">
+        </div>
+
+        <div id='npmdiv' class='plugin'>
+            <h2>Node.js Packages</h2>
+            <table id='npm'>
+                <tr>
+                    <th>Package</th>
+                    <th>Version</th>
+                </tr>
+                <tr class='template'>
+                    <td class='key'></td>
+                    <td class='version'></td>
+                </tr>
+            </table>
+            <input type='button' value='Refresh' onclick="getdata('npm');return !1">
+        </div>
+
+        <div id='pingdiv' class='plugin'>
+            <h2>Ping/Traceroute</h2>
+            <div id='pingformdiv'>
+                Address: <input type='text' size='26' id='pingaddress'> <input type='button' value='Ping' onclick='runping("ping"); return false;'> <input type='button' value='Traceroute' onclick='runping("traceroute"); return false;'>
+            </div>
+            <div id='pingcont' class='hidden'>
+                <h3>Ping <span id="pingaddressh3"></span></h3>
+                <div id='ping_stats'>
+                    <span>Transmitted :</span><span class='transmitted'></span>, &nbsp;
+                    <span>Received :</span><span class='received'></span>, &nbsp;
+                    <span>Loss:</span><span class='loss'></span> %, &nbsp;
+                    <span>Time :</span><span class='time'></span>
+                </div>
+                <div id='ping_rtt'>
+                    <span>Min :</span><span class='min'></span>, &nbsp;
+                    <span>Avg :</span><span class='avg'></span>, &nbsp;
+                    <span>Max:</span><span class='max'></span>, &nbsp;
+                    <span>MDev: </span><span class='mdev'></span>
+                </div>
+                <table id='ping'>
+                    <tr>
+                        <th>Sequence</th>
+                        <th>Bytes</th>
+                        <th>RDNS</th>
+                        <th>IP</th>
+                        <th>TTL</th>
+                        <th>Time</th>
+                    </tr>
+                    <tr class='template'>
+                        <td class='seq'></td>
+                        <td class='bytes'></td>
+                        <td class='rdns'></td>
+                        <td class='ip'></td>
+                        <td class='ttl'></td>
+                        <td class='time'></td>
+                    </tr>
+                </table>
+            </div>
+            <div id='traceroutecont' class='hidden'>
+                <h3>Traceroute <span id="tracerouteaddressh3"></span></h3>
+                <table id='traceroute'>
+                    <tr>
+                        <th>Hop</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Time</th>
+                    </tr>
+                    <tr class='template'>
+                        <td class='hop'></td>
+                        <td class='name'></td>
+                        <td class='address'></td>
+                        <td class='time'></td>
+                    </tr>
+                </table>
+            </div>
+            <div class='loading' id='pingloading'>
+                <img src='http://nodeping.com/images/loading.gif' border=0>
+            </div>
+        </div>
+
+    </div>
+    <div class='footer'>
+        <a href="http://nodeping.com"><img src="http://nodeping.com/images/nodeping_logo_trans_black_80.png" border=0></a>
+        <br>
+        Powered by npsystats.  Generated at <span id='time'></span><br>
+    </div>
+  </body>
+</html>
