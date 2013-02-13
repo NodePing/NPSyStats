@@ -31,7 +31,7 @@ var doit = function(request, callback){
         var info = {};
         for(var i=0;i<lines.length; i++){
             var key;
-            var icmp = lines[i].match(/(\d+)\s+bytes\s+from\s+([\w\.\-]+)\s*(\(([\d\.]+)\))*:\s+icmp_seq=(\d+)\s+ttl=(\d+)\s+time=([\d\.]+)/);
+            var icmp = lines[i].match(/(\d+)\s+bytes\s+from\s+([\w\.\-]+)\s*(\(([\d\.]+)\))*:\s+\w+=(\d+)\s+ttl=(\d+)\s+time=([\d\.]+)/);
             if(icmp){
                 info["seq"+icmp[5]] = {bytes: icmp[1], rdns: (icmp[4] && icmp[4].length) ? icmp[2] : "", ip: icmp[4] || icmp[2], seq: icmp[5], ttl: icmp[6], time: icmp[7]};
             } else {

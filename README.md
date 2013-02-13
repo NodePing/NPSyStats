@@ -1,9 +1,9 @@
 npsystats
 ========
 
-npsystats is an application that gathers system information and makes it available as JSON via HTTP.  This application was originally written to give us an easy way to get system information from hosts in JSON format so it can easily be used with [NodePing](http://nodeping.com) server monitoring.  Nothing did quite what we wanted, so here's this.
+npsystats is an application that gathers system information and makes it available as JSON via HTTP as well as through a web interface.  This application was originally written to give us an easy way to get system information from hosts in JSON format so it can easily be used with [NodePing](http://nodeping.com) server monitoring.  Nothing else did quite what we wanted, so here's this.
 
-npsystats is written in node.js.  Currently it only supports linux hosts.
+npsystats is written in node.js.  Currently it only supports linux hosts, but pull requests are welcome for other OS support.
 
 Information available
 ---------------------
@@ -14,17 +14,19 @@ Information available
 * hd partitions and space available
 * running processes
 * npm modules
+* ping and traceroute utilities
 * and more
 
 Installation
 ------------
 1. download it
 2. run it
+
 No special permissions are required for the included plugins.  There are no external dependencies to install, other than assumptions in some plugins about /proc contents and the availability of ping and traceroute.
 
 Usage
 -----
-Visit the host and port in a browser.  Plugins are accessible using their name:
+Visit the host and port in a browser.  The default port is 8086.  Plugins are accessible using their name:
 /info
 /load
 /mem
@@ -70,12 +72,12 @@ Plugins should not require elevated permissions.
 
 HTML output
 -----------
-HTML output can be changed by editing assets/index.html and its accompanying files.  Currently the HTML interface uses /all to get data from the info, load, mem, uptime, network and mounts plugins.  ps and npm are retrieved separately, and ping and traceroute are run on demand.
+HTML output can be changed by editing assets/index.html and its accompanying files.  Currently the HTML interface uses /all to get data from the info, load, mem, uptime, network and mounts plugins.  ps and npm are retrieved separately, and ping and traceroute are run on demand.  These can be easily adjusted as needed.  None of the files in the assets directory are necessary in order for the JSON access to work.  They're just for the human-friendlier web interface.
 
 Contributors
 ------------
-David Caylor
-Shawn Parrish
+* David Caylor
+* Shawn Parrish
 
 Contributing
 ------------
