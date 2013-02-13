@@ -22,6 +22,9 @@ Installation
 1. download it
 2. run it
 
+We typically put it at /opt/npsystats, create a log directory, and run npsystats using forever (you might need to install forever) like this:
+    forever start -a -l /opt/npsystats/log/npsystats.log -p /opt/npsystats /opt/npsystats/index.js
+
 No special permissions are required for the included plugins.  There are no external dependencies to install, other than assumptions in some plugins about /proc contents and the availability of ping and traceroute.
 
 Usage
