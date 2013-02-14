@@ -3,6 +3,8 @@ npsystats
 
 npsystats is an application that gathers system information and makes it available as JSON via HTTP as well as through a web interface.  This application was originally written to give us an easy way to get system information from hosts in JSON format so it can easily be used with [NodePing](http://nodeping.com) server monitoring.  Nothing else did quite what we wanted, so here's this.
 
+You can see it running at http://npsystats.nodeping.com:8000
+
 npsystats is written in node.js.  Currently it only supports linux hosts, but pull requests are welcome for other OS support.
 
 Information available
