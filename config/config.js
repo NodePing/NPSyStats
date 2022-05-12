@@ -11,7 +11,8 @@ var config = {
         'network': {'all': true},
         'mounts': {'all': true},
         'ps': {'all': false, 'regex': 'bin/node' },
-        'npm': {'all': false}
+        'npm': {'all': false},
+        'dnsquery': {'all': true, 'server': '127.0.0.1', 'fqdns': ['nodeping.com']}
     },
     strings: {
         index: "Welcome to npsystats",
